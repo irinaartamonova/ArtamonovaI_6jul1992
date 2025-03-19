@@ -1,0 +1,176 @@
+{
+    "info": {
+        "_postman_id": "YOUR_POSTMAN_ID",
+        "name": "Sibdar-SPB Cart Smoke Test",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "https://www.sibdar-spb.ru",
+            "description": "Base URL of the website"
+        },
+        {
+            "key": "product_id",
+            "value": "YOUR_PRODUCT_ID",
+            "description": "ID of the product to add to the cart"
+        },
+        {
+            "key": "cart_item_key",
+            "value": "YOUR_CART_ITEM_KEY",
+            "description": "Key of the item in the cart (obtained after adding the product)"
+        }
+    ],
+    "item": [
+        {
+            "name": "Add Product to Cart",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "action",
+                            "value": "woocommerce-ajax-add-to-cart",
+                            "type": "text"
+                        },
+                        {
+                            "key": "product_id",
+                            "value": "{{product_id}}",
+                            "type": "text"
+                        },
+                        {
+                            "key": "quantity",
+                            "value": "1",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{base_url}}/?wc-ajax=add_to_cart",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "wc-ajax",
+                            "value": "add_to_cart"
+                        }
+                    ]
+                },
+                "description": "Adds a product to the cart."
+            },
+            "response": []
+        },
+        {
+            "name": "Update Cart Item Quantity",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "action",
+                            "value": "woocommerce-ajax",
+                            "type": "text"
+                        },
+                        {
+                            "key": "update_cart_item",
+                            "value": "{{cart_item_key}}",
+                            "type": "text"
+                        },
+                        {
+                            "key": "product_id",
+                            "value": "{{product_id}}",
+                            "type": "text"
+                        },
+                        {
+                            "key": "quantity",
+                            "value": "3",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{base_url}}/?wc-ajax=update_cart",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "wc-ajax",
+                            "value": "update_cart"
+                        }
+                    ]
+                },
+                "description": "Updates the quantity of a specific item in the cart."
+            },
+            "response": []
+        },
+        {
+            "name": "Remove Cart Item",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "action",
+                            "value": "woocommerce-ajax",
+                            "type": "text"
+                        },
+                        {
+                            "key": "remove_item",
+                            "value": "{{cart_item_key}}",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{base_url}}/?wc-ajax=remove_from_cart",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "wc-ajax",
+                            "value": "remove_from_cart"
+                        }
+                    ]
+                },
+                "description": "Removes an item from the cart."
+            },
+            "response": []
+        }
+    ]
+}
